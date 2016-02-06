@@ -1,6 +1,23 @@
 <?php
+include "setup_classes.php";
 
-if (($inputfile = fopen("20162501-setup.csv", "r")) !== FALSE) 
+if (($infile = fopen("20162501-setup.csv", "r")) == TRUE)
+{
+    $mysetups = setup::new_setup_from_file($infile);
+    print_r($mysetups);
+} else {
+    echo "Cannot open file\n";
+}
+
+if (setup::compare($mysetups[102], $mysetups[103]))
+{
+    echo "match!\n";
+} else {
+    echo "no match\n";
+}
+
+/*
+if (($inputfile = fopen($file_name, "r")) !== FALSE)
 {
     $data = fgetcsv($inputfile);
 	    for ($i = 0; $i <= count($data); ++$i)
@@ -16,5 +33,6 @@ if (($inputfile = fopen("20162501-setup.csv", "r")) !== FALSE)
 		echo "\n".$room[0];
 		//string pattern, string subject [, array &matches [, int flags [, int offset]]])
 }
+*/
 
 ?>
